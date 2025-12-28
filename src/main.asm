@@ -20,16 +20,10 @@ main:
     sll     v1, a1, 2
     subu    v0, v0, v1
     addu    at, at, v0
+    ; a2 <- max sharpness
+    lh      a2, 0x5CC(s3)
+
     ; v0 <- sharp idx
-    lb      v1, 0x9(at)
-    sll     a2, v1, 0x3
-	sll     v1, v1, 0x1
-	addu    v1, v1, a2
-	sll     v0, v1, 0x2
-	addu    v1, v1, v0
-	addiu   a2, v1, 0x96
-
-
     lb      v0, 0x8(at)
     sll     v1, v0, 2
     addu    v0, v1, v1
