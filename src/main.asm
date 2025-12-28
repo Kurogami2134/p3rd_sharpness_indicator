@@ -21,7 +21,7 @@ main:
     subu    v0, v0, v1
     addu    at, at, v0
     ; a2 <- max sharpness
-    lh      a2, 0x5CC(s3)
+    lh      a2, SHARP_OFFSET(s3)
 
     ; v0 <- sharp idx
     lb      v0, 0x8(at)

@@ -12,6 +12,7 @@ LENGTH_POS      equ 0
 LENGTH_UV       equ 8
 UV_OFFSET       equ 0x3F
 EQUIPPED_WEAPON equ 0x09B49234
+SHARP_OFFSET    equ 0x5CC
 
 HOOK            equ 0x09D620CC
 HOOK_RET        equ 0x088A7F60
