@@ -9,7 +9,13 @@ main:
     lb      a0, 0x1(at)
     addiu   a0, a0, -5
     lh      a1, 0x2(at)
-    la      at, WEAPON_TABLES
+
+    move    a2, ra
+    bal     @@get_offset
+    nop
+@@get_offset:
+    addiu   at, ra, WEAPON_TABLES - @@get_offset
+    move    ra, a2
     
     ; a0 * 4
     sll     a0, a0, 2

@@ -3,8 +3,6 @@
 
 .relativeinclude on
 
-LOAD_ADD        equ 0x08802A00
-
 SHARPNESS_TABLE equ 0x08983060
 DEFAULT_LENGTH  equ 0x2F
 SPRITE_INFO     equ 0x08B2D09C
@@ -17,10 +15,12 @@ SHARP_OFFSET    equ 0x5DC
 HOOK            equ 0x0A168C20
 HOOK_RET        equ 0x088A98B8
 
-.createfile "../bin/hd.bin", LOAD_ADD - 8
-.word LOAD_ADD
-.word @main_block_end - LOAD_ADD
+.createfile "../bin/hd.bin", 0
 
+.word 1 ;  Main Block
+.word @main_block_end - @main_block
+.ascii "WSSB"
+@main_block:
 .include "main.asm"
 
 WEAPON_TABLES:; need to update them all
@@ -37,9 +37,13 @@ WEAPON_TABLES:; need to update them all
 .word 0 ; bow
 .word 0x08994A9C
 .word 0x089936EC
+
 @main_block_end:
+
+.word 2 ;  Hook Block
 .word HOOK
-.word 8
-    jal     main
-    nop
+.halfword main - @main_block
+.byte 0xC
+.byte 1
+
 .close
